@@ -1,6 +1,6 @@
-import { parse as findLanguage } from '../../src/index';
+const { parse: findLanguage }  = require('../../dist/index')
 
-describe('findLanguage mjs test cases', () => {
+describe('findLanguage umd test cases', () => {
   describe('sr-Cyrl-RS', () => {
     const actual = findLanguage('sr-Cyrl-RS')
 

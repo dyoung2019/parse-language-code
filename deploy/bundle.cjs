@@ -1,16 +1,17 @@
 const esBuild = require('esbuild')
-const getVersionStrings = require('./src/getVersionStrings')
+const getAllNodeTargets = require('./src/getAllNodeTargets')
 const readPackageConfig = require('./src/readPackageConfig')
-const parseVersion = require('./src/parseVersionString')
+const getSingleNodeTarget = require('./src/getSingleNodeTarget')
 
 const config = readPackageConfig()
 
-console.log(getVersionStrings(config.engines.node))
+const nodeValue = config.engines.node
 
-// esBuild.buildSync({
-//   entryPoints: ['./build/index.js'],
-//   bundle: true,
-//   minify: true,ß
-//   target: ['node10.4'],
-//   outfile: './dist/index.js',
-// })
+esBuild.buildSync({
+  entryPoints: ['./build/index.js'],
+  bundle: true,
+  platform: 'node',
+  minify: true,
+  target: getAllNodeTargets(nodeValue),
+  outfile: './dist/index.js',
+})

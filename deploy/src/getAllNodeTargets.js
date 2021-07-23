@@ -1,10 +1,10 @@
 const prependNodePrefix = require('./prependNodePrefix')
 const removeOperand = require('./removeOperand')
 
-function getVersionStrings(value) {
+function getAllNodeTargets(value) {
   return value.split(' ')
     .map(removeOperand)
     .map(prependNodePrefix)
 }
 
-module.exports = getVersionStrings
+module.exports = getAllNodeTargets

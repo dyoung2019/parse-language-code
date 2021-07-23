@@ -1,3 +1,1 @@
-export default function doApp() {
-  return 'hello world'
-}
+export { default as parse } from './parseLanguageCode';

@@ -1,7 +1,7 @@
 const removeOperand = require('./removeOperand')
-const selectVersion = require('./selectHigherVersion')
+const getHigherVersion = require('./getHigherVersion')
 
-function parseVersionString(value) {
+function selectAppropriateVersion(value) {
   const [left, right] = value.split(' ')
 
   const lhs = removeOperand(left)
@@ -10,8 +10,8 @@ function parseVersionString(value) {
   if (!!lhs && !rhs) {
     return lhs
   } else {
-    return selectVersion(lhs, rhs)
+    return getHigherVersion(lhs, rhs)
   }
 }
 
-module.exports = parseVersionString
+module.exports = selectAppropriateVersion

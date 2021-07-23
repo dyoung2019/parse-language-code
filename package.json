@@ -1,21 +1,30 @@
 {
-  "name": "ts-module-template",
+  "name": "@dyoung2019/parse-language-code",
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "clean": "npm run clean:lib && npm run clean:dist",
+    "build": "npm run build:ts && npm run build:lib && npm run build:bundle",
+    "test:only": "npm run test:ts && npm run test:lib && npm run test:bundle",
+
+    "clean": "npm run clean:lib && npm run clean:bundle && npm run clean:dist",
+    "clean:dist": "node ./deploy/delete-lib.js",
     "dev:ts": "npm run build:ts && npm run test:ts",
     "build:ts": "tsc -p tsconfig-ts.json",
     "test:ts": "jest --config jest-ts.config.js",
+
     "dev:lib": "npm run build:lib && npm run deploy:lib && npm run test:lib",
-    "build:lib": "tsc -p tsconfig-lib.json",
+    "compile:lib": "tsc -p tsconfig-lib.json",
+    "build:lib": "npm run compile:lib && npm run deploy:lib",
     "deploy:lib": "node ./deploy/copy-mjs.js",
-    "test:lib": "node --experimental-vm-modules ./node_modules/.bin/jest --config jest-lib.config.js",
+    "test:lib": "node --experimental-vm-modules --experimental-json-modules ./node_modules/.bin/jest --config jest-lib.config.js",
     "clean:lib": "tsc --build --clean tsconfig-lib.json && node ./deploy/delete-lib.js",
-    "dev:dist": "npm run build:dist && npm run bundle:dist",
-    "build:dist": "tsc -p tsconfig-dist.json",
-    "clean:dist": "tsc --build --clean tsconfig-dist.json",
-    "bundle:dist": "node ./bundle.cjs"
+  
+    "dev:bundle": "npm run build:bundle && npm run test:bundle",
+    "build:bundle": "npm run compile:bundle && npm run deploy:bundle",
+    "compile:bundle": "tsc -p tsconfig-bundle.json && node ./deploy/bundle.cjs",
+    "deploy:bundle": "node ./deploy/copy-mjs.js",
+    "clean:bundle": "tsc --build --clean tsconfig-bundle.json",
+    "test:bundle": "jest --config jest-bundle.config.js"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",
