@@ -14,8 +14,9 @@
 
     "dev:lib": "npm run build:lib && npm run deploy:lib && npm run test:lib",
     "compile:lib": "tsc -p tsconfig-lib.json",
-    "build:lib": "npm run compile:lib && npm run deploy:lib",
+    "build:lib": "npm run compile:lib && npm run deploy:lib && npm run embed:lib",
     "deploy:lib": "node ./deploy/copy-mjs.js",
+    "embed:lib": "node ./deploy/embed.cjs",
     "test:lib": "node --experimental-vm-modules --experimental-json-modules ./node_modules/.bin/jest --config jest-lib.config.js",
     "clean:lib": "tsc --build --clean tsconfig-lib.json && node ./deploy/delete-lib.js",
   

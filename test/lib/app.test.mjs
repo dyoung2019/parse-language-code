@@ -1,4 +1,4 @@
-import { parse as findLanguage } from '../../lib/index.js'
+import { parse as findLanguage } from '../../lib/index.embed.js'
 
 describe('findLanguage mjs test cases', () => {
   describe('sr-Cyrl-RS', () => {
